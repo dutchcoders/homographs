@@ -6,10 +6,17 @@ This tool will generate a table of all homographs (identical characters) within 
 
 [https://isc.sans.edu/forums/diary/Tool+to+Detect+Active+Phishing+Attacks+Using+Unicode+LookAlike+Domains/22310/](https://isc.sans.edu/forums/diary/Tool+to+Detect+Active+Phishing+Attacks+Using+Unicode+LookAlike+Domains/22310/)
 
+# Dependencies
+You'll need to get the the freetype (font rasterizer) and (Internationalized Domain Names for Applications) idna packages.
+```
+$ go get github.com/golang/freetype
+$ go get -u golang.org/x/net/idna
+```
+
 # Usage
 
 ```
-$ homographs --font-file ./Arial.ttf apple.com
+$ homographs --font-file ./arial.ttf apple.com
 Homographs: brutefind homographs within a font
 by Remco Verhoef (@remco_verhoef) of DutchSec
 ---------------------------------------------------
@@ -95,4 +102,12 @@ appƖе.com xn--app-45a964a.com
 appӏe.com xn--appe-xre.com
 appӏе.com xn--app-tdd38e.com
 applе.com xn--appl-y4d.com
-``` 
+```
+
+# Troubleshooting
+In the event that something goes pear-shaped, make sure that you have defined your workspace [according to the go Lanugage documentation](https://golang.org/doc/code.html). The error would be something like: `package github.com/golang/freetype: cannot download, $GOPATH not set. For more details see: go help gopath`
+
+To set your working directory, add this to ~/.profile or ~/.bashrc.
+```
+$ export GOPATH="$HOME/your-workspace-dir/"
+```
